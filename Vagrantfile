@@ -10,7 +10,7 @@ Vagrant::Config.run do |config|
         lv4_config.vm.forward_port 3306, 8889
         lv4_config.vm.forward_port 5432, 5433
         lv4_config.vm.host_name = "WeBWorK"
-        lv4_config.vm.share_folder("www", "/opt/webwork/webwork2", "./",  :extra => 'dmode=777,fmode=777')
+        lv4_config.vm.share_folder("www", "/opt/webwork/webwork2", "./webwork2",  :extra => 'dmode=777,fmode=777')
         #lv4_config.vm.provision :shell, :inline => "echo \"America/Denver\" | sudo tee /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata"
     end
 end
