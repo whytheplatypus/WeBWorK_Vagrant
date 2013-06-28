@@ -1,0 +1,3 @@
+[submodule "webwork2"]
+	path = webwork2
+	url = https://github.com/openwebwork/webwork2.git
