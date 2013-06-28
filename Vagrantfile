@@ -1,5 +1,5 @@
 Vagrant::Config.run do |config|
-    config.vm.define :laravel4 do |lv4_config|
+    config.vm.define :webwork do |lv4_config|
         lv4_config.vm.box = "precise32"
         lv4_config.vm.host_name = "wwdevbox"
         lv4_config.vm.box_url = "http://files.vagrantup.com/precise32.box"
