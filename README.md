@@ -8,6 +8,7 @@ To set up a quick dev environment for WeBWorK:
 ```
 git clone https://github.com/whytheplatypus/WeBWorK_Vagrant.git
 cd WeBWorK_Vagrant
+git checkout -b packaged origin/packaged
 git submodule update --init --recursive
 vagrant up
 ```
