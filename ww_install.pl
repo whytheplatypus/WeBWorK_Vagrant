@@ -1666,10 +1666,10 @@ sub get_webwork {
     #  get_webwork2_repo(WEBWORK2_REPO);   #WEBWORK2_REPO constant defined at top
     #my $ww2_cmd = $apps->{git} . " clone " . $ww2_repo;
 
-    my $pg_repo = get_pg_repo(PG_REPO);    #PG_REPO constant defined at top
+    #my $pg_repo = get_pg_repo(PG_REPO);    #PG_REPO constant defined at top
     #my $pg_cmd = $apps->{git} . " clone " . $pg_repo;
 
-    my $opl_repo = get_opl_repo(OPL_REPO);    #OPL_REPO constant defined at top
+    #my $opl_repo = get_opl_repo(OPL_REPO);    #OPL_REPO constant defined at top
     #my $opl_cmd = $apps->{git} . " clone " . $opl_repo;
 
     my $buffer;
