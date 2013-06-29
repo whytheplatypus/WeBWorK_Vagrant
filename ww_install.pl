@@ -1536,7 +1536,7 @@ END
     $prompt = "Create a new database or use an existing one? ";
     $choices = ['Create a new database','Use an existing database'];
     $default = 'Create a new database';
-    my $new_or_existing = get_reply($print_me,$prompt,$choices,$default);     
+    my $new_or_existing = 'Use an existing database';#get_reply($print_me,$prompt,$choices,$default);     
     if($new_or_existing eq 'Create a new database') {
       print<<END;
 ###################################################################
@@ -1578,9 +1578,9 @@ END
 ####################################################################
 END
       my $prompt = "Name of the existing webwork database:";
-      my $database = get_reply($print_me,$prompt,[],WW_DB);
+      my $database = 'webwork';#get_reply($print_me,$prompt,[],WW_DB);
       my $username = get_database_username(WWDB_USER);
-      my $password = get_database_password();
+      my $password = 'password';#get_database_password();
       my $can_connect = connect_to_database($server,$database,$username,$password);
       return ($database,$server,$username,$password) if $can_connect;
       get_webwork_database(WW_DB);
@@ -1667,10 +1667,10 @@ sub get_webwork {
     #my $ww2_cmd = $apps->{git} . " clone " . $ww2_repo;
 
     my $pg_repo = get_pg_repo(PG_REPO);    #PG_REPO constant defined at top
-    my $pg_cmd = $apps->{git} . " clone " . $pg_repo;
+    #my $pg_cmd = $apps->{git} . " clone " . $pg_repo;
 
     my $opl_repo = get_opl_repo(OPL_REPO);    #OPL_REPO constant defined at top
-    my $opl_cmd = $apps->{git} . " clone " . $opl_repo;
+    #my $opl_cmd = $apps->{git} . " clone " . $opl_repo;
 
     my $buffer;
     # my (
@@ -1688,39 +1688,39 @@ sub get_webwork {
     # } else {
     #     die "Couldn't get webwork2: $ww2_error_message\n";
     # }
-    my (
-        $pg_success,    $pg_error_message, $pg_full_buf,
-        $pg_stdout_buf, $pg_stderr_buf
-      )
-      = run(
-        command => $pg_cmd,
-        verbose => IPC_CMD_VERBOSE,
-        timeout => IPC_CMD_TIMEOUT
-      );
-    if ($pg_success) {
-        print "fetched pg successfully.\n";
-    } else {
-        die "Couldn't get pg: $pg_error_message\n";
-    }
+    # my (
+    #     $pg_success,    $pg_error_message, $pg_full_buf,
+    #     $pg_stdout_buf, $pg_stderr_buf
+    #   )
+    #   = run(
+    #     command => $pg_cmd,
+    #     verbose => IPC_CMD_VERBOSE,
+    #     timeout => IPC_CMD_TIMEOUT
+    #   );
+    # if ($pg_success) {
+    #     print "fetched pg successfully.\n";
+    # } else {
+    #     die "Couldn't get pg: $pg_error_message\n";
+    # }
 
     make_path( 'libraries', { owner => $wwadmin, group => $wwadmin } );
     make_path( 'courses',   { owner => $wwadmin, group => $wwadmin } );
     chdir "$prefix/libraries";
 
-    my (
-        $opl_success,    $opl_error_message, $opl_full_buf,
-        $opl_stdout_buf, $opl_stderr_buf
-      )
-      = run(
-        command => $opl_cmd,
-        verbose => IPC_CMD_VERBOSE,
-        timeout => IPC_CMD_TIMEOUT
-      );
-    if ($opl_success) {
-        print "fetched OPL successfully.\n";
-    } else {
-        die "Couldn't get OPL: $opl_error_message\n";
-    }
+    # my (
+    #     $opl_success,    $opl_error_message, $opl_full_buf,
+    #     $opl_stdout_buf, $opl_stderr_buf
+    #   )
+    #   = run(
+    #     command => $opl_cmd,
+    #     verbose => IPC_CMD_VERBOSE,
+    #     timeout => IPC_CMD_TIMEOUT
+    #   );
+    # if ($opl_success) {
+    #     print "fetched OPL successfully.\n";
+    # } else {
+    #     die "Couldn't get OPL: $opl_error_message\n";
+    # }
 }
 
 #############################################################
@@ -2135,7 +2135,7 @@ print <<EOF;
 # 
 ######################################################################
 EOF
-unpack_jsMath_fonts($webwork_dir);
+#unpack_jsMath_fonts($webwork_dir);
 
 print <<EOF;
 #######################################################################
@@ -2148,7 +2148,7 @@ print <<EOF;
 # 
 ######################################################################
 EOF
-get_MathJax($webwork_dir);
+#get_MathJax($webwork_dir);
 
 print <<EOF;
 #######################################################################
@@ -2226,7 +2226,7 @@ print <<EOF;
 # 
 ######################################################################
 EOF
-setup_opl($WW_PREFIX);
+#setup_opl($WW_PREFIX);
 
 print <<EOF;
 #######################################################################
