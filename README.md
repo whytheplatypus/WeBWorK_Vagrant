@@ -3,6 +3,8 @@ WeBWorK_Vagrant
 
 vagrant files for WeBWorK development
 
+Check out https://github.com/whytheplatypus/WeBWorK_Vagrant/tree/packaged for a faster build.
+
 To set up a quick dev environment for WeBWorK:
 
 ```
