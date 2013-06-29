@@ -1560,10 +1560,18 @@ END
       my $database = get_reply($print_me,$prompt,[],WW_DB);
       my $exists = database_exists($mysql_root_password,$database,$server);
       if($exists) {
-        print "\n\nSorry, Charlie. That database already exists. Let's try".
-          " this again.\n\n";
-        sleep(2);
-        get_webwork_database();
+        my $print_me =<<END;
+###################################################################
+# Ok, we can use an existing database.
+####################################################################
+END
+        my $prompt = "Name of the existing webwork database:";
+        my $database = get_reply($print_me,$prompt,[],WW_DB);
+        my $username = get_database_username(WWDB_USER);
+        my $password = get_database_password();
+        my $can_connect = connect_to_database($server,$database,$username,$password);
+        return ($database,$server,$username,$password) if $can_connect;
+        get_webwork_database(WW_DB);
       } else {
         my $username = get_database_username(WWDB_USER);
         my $password = get_database_password();
@@ -1571,19 +1579,6 @@ END
             $username, $password );
         return ($database,$server,$username,$password);
       }
-    } elsif($new_or_existing eq 'Use an existing database') {
-      my $print_me =<<END;
-###################################################################
-# Ok, we can use an existing database.
-####################################################################
-END
-      my $prompt = "Name of the existing webwork database:";
-      my $database = get_reply($print_me,$prompt,[],WW_DB);
-      my $username = get_database_username(WWDB_USER);
-      my $password = get_database_password();
-      my $can_connect = connect_to_database($server,$database,$username,$password);
-      return ($database,$server,$username,$password) if $can_connect;
-      get_webwork_database(WW_DB);
     } else {
       get_webwork_database(WW_DB);
     }
@@ -1666,11 +1661,11 @@ sub get_webwork {
     #  get_webwork2_repo(WEBWORK2_REPO);   #WEBWORK2_REPO constant defined at top
     #my $ww2_cmd = $apps->{git} . " clone " . $ww2_repo;
 
-    my $pg_repo = get_pg_repo(PG_REPO);    #PG_REPO constant defined at top
-    my $pg_cmd = $apps->{git} . " clone " . $pg_repo;
+    # my $pg_repo = get_pg_repo(PG_REPO);    #PG_REPO constant defined at top
+    # my $pg_cmd = $apps->{git} . " clone " . $pg_repo;
 
     my $opl_repo = get_opl_repo(OPL_REPO);    #OPL_REPO constant defined at top
-    my $opl_cmd = $apps->{git} . " clone " . $opl_repo;
+    my $opl_cmd = "rm -rf /opt/webwork/libraries/webwork-open-problem-library;" . $apps->{git} . " clone " . $opl_repo;
 
     my $buffer;
     # my (
@@ -1688,20 +1683,20 @@ sub get_webwork {
     # } else {
     #     die "Couldn't get webwork2: $ww2_error_message\n";
     # }
-    my (
-        $pg_success,    $pg_error_message, $pg_full_buf,
-        $pg_stdout_buf, $pg_stderr_buf
-      )
-      = run(
-        command => $pg_cmd,
-        verbose => IPC_CMD_VERBOSE,
-        timeout => IPC_CMD_TIMEOUT
-      );
-    if ($pg_success) {
-        print "fetched pg successfully.\n";
-    } else {
-        die "Couldn't get pg: $pg_error_message\n";
-    }
+    # my (
+    #     $pg_success,    $pg_error_message, $pg_full_buf,
+    #     $pg_stdout_buf, $pg_stderr_buf
+    #   )
+    #   = run(
+    #     command => $pg_cmd,
+    #     verbose => IPC_CMD_VERBOSE,
+    #     timeout => IPC_CMD_TIMEOUT
+    #   );
+    # if ($pg_success) {
+    #     print "fetched pg successfully.\n";
+    # } else {
+    #     die "Couldn't get pg: $pg_error_message\n";
+    # }
 
     make_path( 'libraries', { owner => $wwadmin, group => $wwadmin } );
     make_path( 'courses',   { owner => $wwadmin, group => $wwadmin } );
@@ -2124,7 +2119,7 @@ print <<EOF;
 EOF
 get_webwork( $WW_PREFIX, $apps );
 
-print <<EOF;
+#print <<EOF;
 #######################################################################
 #
 #
@@ -2134,8 +2129,8 @@ print <<EOF;
 #
 # 
 ######################################################################
-EOF
-unpack_jsMath_fonts($webwork_dir);
+#EOF
+#unpack_jsMath_fonts($webwork_dir);
 
 print <<EOF;
 #######################################################################

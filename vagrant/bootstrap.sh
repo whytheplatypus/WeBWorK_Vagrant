@@ -47,7 +47,9 @@ apt-get -y install liblocal-lib-perl
 
 install CPAN
 reload cpan
-sudo cpan Term::ReadPassword XML::Parser::EasyTree HTML::Template Iterator Iterator::Util Mail::Sender 
+sudo cpan install Term::ReadPassword XML::Parser::EasyTree HTML::Template Iterator Iterator::Util Mail::Sender 
+mkdir /usr/include/apache2
+cpan install Apache2::SOAP
 a2enmod apreq
 apache2ctl restart
 
