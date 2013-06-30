@@ -1,6 +1,10 @@
 .DS_Store
 .vagrant
 *~
+<<<<<<< HEAD
 *.save
+=======
+.DS_Store
+>>>>>>> a0e846d5e9abe7b6692503b38ee149637a0bc9ef
 webwork2
 pg
