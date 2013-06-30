@@ -8,7 +8,7 @@ To set up with a prebuilt box:
 ```
 git clone https://github.com/whytheplatypus/WeBWorK_Vagrant.git
 cd WeBWorK_Vagrant
-git checkout packaged origin/packaged
+git checkout -b packaged origin/packaged
 git clone https://github.com/<your-git-username>/webwork2.git
 git clone https://github.com/<your-git-username>/pg.git
 cd webwork2
