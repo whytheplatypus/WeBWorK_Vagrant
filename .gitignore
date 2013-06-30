@@ -1,1 +1,5 @@
 .vagrant
+*~
+.DS_Store
+webwork2
+pg
